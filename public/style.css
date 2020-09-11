@@ -50,7 +50,22 @@ form button:hover {
 }
 
 footer {
+  margin: auto;
   margin-top: 3em;
   padding-top: 1.5em;
   border-top: 1px solid lightgrey;
+}
+.dataDisplayer{
+  display: flex;
+  margin-block-start: 0;
+  margin:auto;
+  flex-wrap: wrap;
+}
+
+.item{
+  list-style: none;
+  width: 150px;
+}
+.loading{
+  
 }

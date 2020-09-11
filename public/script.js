@@ -1,41 +1,35 @@
 // client-side js, loaded by index.html
 // run by the browser each time the page is loaded
 
-console.log("hello world :o");
-
 // define variables that reference elements on our page
-const dreamsList = document.getElementById("dreams");
-const dreamsForm = document.querySelector("form");
+const dataDisplayer = document.getElementById("dataDisplayer");
+const loadPostForm = document.querySelector("form");
+const loading = document.getElementById("loading");
 
-// a helper function that creates a list item for a given dream
-function appendNewDream(dream) {
-  const newListItem = document.createElement("li");
-  newListItem.innerText = dream;
-  dreamsList.appendChild(newListItem);
-}
+// listen for the form to be submitted and add a new dream when it is
+loadPostForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  loading.innerText = "loading...";
+  const dayInput =  new Date(document.getElementById("dayInput").value).getTime()/1000;
+  const subredditInput = document.getElementById("subredditInput").value;
 
-// fetch the initial list of dreams
-fetch("/dreams")
-  .then(response => response.json()) // parse the JSON from the server
-  .then(dreams => {
-    // remove the loading text
-    dreamsList.firstElementChild.remove();
-  
-    // iterate through every dream and add it to our page
-    dreams.forEach(appendNewDream);
-  
-    // listen for the form to be submitted and add a new dream when it is
-    dreamsForm.addEventListener("submit", event => {
-      // stop our form submission from refreshing the page
-      event.preventDefault();
-
-      // get dream value and add it to the list
-      let newDream = dreamsForm.elements.dream.value;
-      dreams.push(newDream);
-      appendNewDream(newDream);
-
-      // reset form
-      dreamsForm.reset();
-      dreamsForm.elements.dream.focus();
-    });
+  fetch("/posts", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ dayInput, subredditInput }),
+  }).then((res) => {
+    
+    res.json().then((dreams) =>
+      dreams.forEach((post) => {
+        
+       let node = document.createElement("li");
+       node.className = 'item';
+        node.innerHTML =  `<a href="https://reddit.com${post.data.permalink}"><img src="${post.data.thumbnail}"/></a>` ;
+        dataDisplayer.appendChild(node);
+        loading.innerText = "";
+      })
+    );
   });
+});
