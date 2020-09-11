@@ -67,5 +67,20 @@ footer {
   width: 150px;
 }
 .loading{
-  
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.9)
+}
+.loading.none{
+  display: none;
+}
+.loading-text{
+  font-weight: bold;
+  color: #fff;
+  top: 50vh;
+  left: 50vw;
+  position: relative;
 }

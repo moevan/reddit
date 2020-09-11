@@ -9,7 +9,7 @@ const loading = document.getElementById("loading");
 // listen for the form to be submitted and add a new dream when it is
 loadPostForm.addEventListener("submit", (event) => {
   event.preventDefault();
-  loading.innerText = "loading...";
+  loading.classList.remove("none");
   const dayInput =  new Date(document.getElementById("dayInput").value).getTime()/1000;
   const subredditInput = document.getElementById("subredditInput").value;
 
@@ -28,7 +28,7 @@ loadPostForm.addEventListener("submit", (event) => {
        node.className = 'item';
         node.innerHTML =  `<a href="https://reddit.com${post.data.permalink}"><img src="${post.data.thumbnail}"/></a>` ;
         dataDisplayer.appendChild(node);
-        loading.innerText = "";
+        loading.classList.add("none");
       })
     );
   });

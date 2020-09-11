@@ -73,7 +73,7 @@ async function filterPosts(posts,dayX){
 async function getNewPosts(subreddit,dayX) {
   let myCurrentToken = await getCurrentToken();
   let res = await fetch(
-    `https://oauth.reddit.com/r/${subreddit}/new?limit=10`,
+    `https://oauth.reddit.com/r/${subreddit}/new?limit=100`,
     {
       headers: {
         Authorization: "Bearer " + myCurrentToken,
