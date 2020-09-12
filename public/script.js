@@ -21,15 +21,25 @@ loadPostForm.addEventListener("submit", (event) => {
     body: JSON.stringify({ dayInput, subredditInput }),
   }).then((res) => {
     
-    res.json().then((dreams) =>
-      dreams.forEach((post) => {
+    res.json().then((posts) => {
+
+console.log(posts);
+if (posts.length > 0){
+  posts.forEach((post) => {
         
-       let node = document.createElement("li");
-       node.className = 'item';
-        node.innerHTML =  `<a href="https://reddit.com${post.data.permalink}"><img src="${post.data.thumbnail}"/></a>` ;
-        dataDisplayer.appendChild(node);
-        loading.classList.add("none");
-      })
+    let node = document.createElement("li");
+    node.className = 'item';
+     node.innerHTML =  `<a href="https://reddit.com${post.data.permalink}"><img src="${post.data.thumbnail}"/></a>` ;
+     dataDisplayer.appendChild(node);
+     loading.classList.add("none");
+   })
+} else {
+  dataDisplayer.innerText = "Found nothing";
+  loading.classList.add("none");
+}
+
+    
+    }
     );
   });
 });
