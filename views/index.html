@@ -2,68 +2,68 @@
 <!-- served from your routes in server.js -->
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Get latest Reddit posts that has a photo, of your chosen subreddit, created by accounts born after your chosen day" />
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta
+            name="description"
+            content="Get latest Reddit posts that has a photo, of your chosen subreddit, created by accounts born after your chosen day"
+        />
 
-    <title>My Reddit</title>
+        <title>My Reddit</title>
 
-    <link
-      id="favicon"
-      rel="icon"
-      href="https://glitch.com/edit/favicon-app.ico"
-      type="image/x-icon"
-    />
-    <!-- import the webpage's stylesheet -->
-    <link rel="stylesheet" href="/style.css" />
+        <link
+            id="favicon"
+            rel="icon"
+            href="https://glitch.com/edit/favicon-app.ico"
+            type="image/x-icon"
+        />
+        <!-- import the webpage's stylesheet -->
+        <link rel="stylesheet" href="/style.css" />
 
-    <!-- import the webpage's client-side javascript file -->
-    <script src="/script.js" defer></script>
-  </head>
-  <body>
-    <header>
-      <h1>My Reddit</h1>
-      
-      <p>Get latest Reddit posts that has a photo, of your chosen subreddit, created by accounts born after your chosen day or deleted accounts</p>
-    </header>
+        <!-- import the webpage's client-side javascript file -->
+        <script src="/script.js" defer></script>
+    </head>
+    <body>
+        <header>
+            <h1>My Reddit</h1>
 
-    <main>
-      
+            <p>
+                Get latest Reddit posts that has a photo, of your chosen
+                subreddit, created by accounts born after your chosen day or
+                deleted accounts
+            </p>
+        </header>
 
-      <form>
-        <label>
-          
-          <input
-          id="subredditInput"
-            name="dream"
-            type="text"
-            maxlength="100"
-            required
-            placeholder="subreddit"
-          />
-        
-          <input type="date" id="dayInput" name="dayInput"/>
-        </label>
-        <button type="submit" id="submit-dream">Get Posts</button>
-      </form>
+        <main>
+            <form>
+                <label>
+                    <input
+                        id="subredditInput"
+                        name="dream"
+                        type="text"
+                        maxlength="100"
+                        required
+                        placeholder="subreddit"
+                    />
 
-      <section class="dreams">
-        <ul id="dataDisplayer" class="dataDisplayer">
-          <div id="loading" class="loading none"><span class="loading-text">Loading...</span> </div>
-        </ul>
-      </section>
-    </main>
+                    <input type="date" id="dayInput" name="dayInput" />
+                </label>
+                <button type="submit" id="submit-dream">Get Posts</button>
+            </form>
+<button id="clear">Clear Form</button>
+<div id="loading" class="loading none">
+  <span class="loading-text">Loading...</span>
+</div>
+            <section class="dreams">
+                <ul id="dataDisplayer" class="dataDisplayer">
+                   
+                </ul>
+            </section>
+        </main>
 
-    <footer>Made by Van</footer>
+        <footer>Made by Van</footer>
 
-    <!-- include the Glitch button to show what the webpage is about and
-          to make it easier for folks to view source and remix -->
-    <div
-      class="glitchButton"
-      style="position: fixed; top: 2em; right: 20px"
-    ></div>
-    <script src="https://button.glitch.me/button.js" defer></script>
-  </body>
+    </body>
 </html>
