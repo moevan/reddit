@@ -7,7 +7,8 @@ const express = require("express");
 const app = express();
 var bodyParser = require('body-parser');
 var jsonParser = bodyParser.json();
-
+let before = '';
+let after = '';
 const fetch = require("node-fetch");
 const {
   updateSavedToken,
@@ -22,12 +23,6 @@ const moment = require("moment"); // require
 let token;
 
 
-// our default array of dreams
-const dreams = [
-  "Find and count some sheep",
-  "Climb a really tall mountain",
-  "Wash the dishes",
-];
 
 async function isAccCreatedAfterDayX(username,dayX) {
   async function getUserAge() {
@@ -70,10 +65,10 @@ async function filterPosts(posts,dayX){
       return filtered;
 }
 
-async function getNewPosts(subreddit,dayX) {
+async function getNewPosts(subreddit) {
   let myCurrentToken = await getCurrentToken();
   let res = await fetch(
-    `https://oauth.reddit.com/r/${subreddit}/new?limit=100`,
+    `https://oauth.reddit.com/r/${subreddit}/new?limit=5&before=${before}&after=${after}`,
     {
       headers: {
         Authorization: "Bearer " + myCurrentToken,
