@@ -25,29 +25,39 @@ let token;
 
 
 async function isAccCreatedAfterDayX(username,dayX) {
-  async function getUserAge() {
-    let res = await fetch(`https://oauth.reddit.com/user/${username}/about`, {
-      headers: {
-        Authorization: "Bearer " + token,
-      },
-    });
-    let json = await res.json();
 
-    return json.data.created_utc;
+  if (username == '[deleted]'){
+
+    return true;
+    
+  } else {
+    async function getUserAge() {
+      let res = await fetch(`https://oauth.reddit.com/user/${username}/about`, {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      });
+      let json = await res.json();
+
+      return json.data.created_utc;
+    }
+    const timeCreated = await getUserAge();
+
+    return timeCreated > dayX;
   }
-  const timeCreated = await getUserAge();
-  return timeCreated > dayX;
+  
 }
   
 async function filterPosts(posts,dayX){
         
       let j = 1;
       let filtered = [];
-      for (i = 0; i < posts.length - 1; i++) {
+      for (i = 0; i < posts.length ; i++) {
         var post = posts[i];
         let res = await isAccCreatedAfterDayX(post.data.author, dayX);
      
         if (res &&  post.data.thumbnail.includes("http")) {
+          
           filtered.push({
             _id: j,
             data: {
@@ -68,7 +78,7 @@ async function filterPosts(posts,dayX){
 async function getNewPosts(subreddit) {
   let myCurrentToken = await getCurrentToken();
   let res = await fetch(
-    `https://oauth.reddit.com/r/${subreddit}/new?limit=5&before=${before}&after=${after}`,
+    `https://oauth.reddit.com/r/${subreddit}/new?limit=5&after=${after}`,
     {
       headers: {
         Authorization: "Bearer " + myCurrentToken,
@@ -76,7 +86,8 @@ async function getNewPosts(subreddit) {
     }
   );
   let json = await res.json();
-
+before = json.data.before;
+after = json.data.after;
   let posts = json.data.children;
 return posts;
  
